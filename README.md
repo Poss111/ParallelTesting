@@ -40,3 +40,40 @@
         <version>2.12.0</version>
     </dependency>
 ~~~
+
+### Maven Plugins
+~~~
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M3</version>
+            <configuration>
+                <parallel>methods</parallel>
+                <useUnlimitedThreads>true</useUnlimitedThreads>
+                <forkCount>4</forkCount>
+                <includes>
+                    <include>**/*Runner.java</include>
+                </includes>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>com.trivago.rta</groupId>
+            <artifactId>cluecumber-report-plugin</artifactId>
+            <version>2.2.0</version>
+            <executions>
+                <execution>
+                    <id>report</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                        <goal>reporting</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <sourceJsonReportDirectory>${project.build.directory}/html-reports/</sourceJsonReportDirectory>
+                <generatedHtmlReportDirectory>${project.build.directory}/generated-report</generatedHtmlReportDirectory>
+            </configuration>
+        </plugin>
+    </plugins>
+ ~~~
